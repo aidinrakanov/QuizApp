@@ -28,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Questions amount:"
-            android:textColor="@color/Black"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_ar_tut" />
@@ -39,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:text="10"
-            android:textColor="@color/Black"
+
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/text_questions_amount"
             app:layout_constraintLeft_toRightOf="@id/text_questions_amount" />
@@ -64,7 +63,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Category"
-        android:textColor="@color/Black"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/slider" />
 
@@ -73,8 +71,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:spinnerMode="dropdown"
-        android:background="@color/Light_gray"
-        android:dropDownSelector="@color/Black"
         app:layout_constraintTop_toBottomOf="@id/text_category" />
 
     <TextView
@@ -83,8 +79,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Difficulty"
-
-        android:textColor="@color/Black"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/spinner_category" />
 
@@ -93,8 +87,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:spinnerMode="dropdown"
-        android:background="@color/Light_gray"
-        android:dropDownSelector="@color/Black"
         app:layout_constraintTop_toBottomOf="@id/text_difficulty" />
 
     <Button
