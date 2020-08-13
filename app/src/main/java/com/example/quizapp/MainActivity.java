@@ -1,0 +1,47 @@
+package com.example.quizapp;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+
+import com.example.quizapp.UI.fragments.MainFragment;
+import com.example.quizapp.adapters.MainPagerAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class MainActivity extends AppCompatActivity {
+    private ViewPager viewPager;
+    BottomNavigationView bottomNavigationView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        viewPager = findViewById(R.id.main_pager);
+        viewPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+        viewPager.setOffscreenPageLimit(2);
+        bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.main:
+                        viewPager.setCurrentItem(0, false);
+                        break;
+                    case R.id.history:
+                        viewPager.setCurrentItem(1, false);
+                        break;
+                    case R.id.settings:
+                        viewPager.setCurrentItem(2, false);
+                        break;
+                }
+                return true;
+            }
+        });
+
+    }
+
+}
