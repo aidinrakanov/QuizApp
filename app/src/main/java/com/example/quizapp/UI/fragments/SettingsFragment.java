@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.quizapp.R;
-import com.example.quizapp.UI.SettingsViewModel;
+import com.example.quizapp.UI.ViewModels.SettingsViewModel;
 
 public class SettingsFragment extends Fragment {
 

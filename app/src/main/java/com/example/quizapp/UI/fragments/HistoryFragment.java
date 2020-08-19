@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.quizapp.R;
-import com.example.quizapp.UI.HistoryViewModel;
+import com.example.quizapp.UI.ViewModels.HistoryViewModel;
 
 public class HistoryFragment extends Fragment {
 
