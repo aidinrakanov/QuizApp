@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    android:layout_marginTop="10dp"
+    android:elevation="10dp"
+    app:cardBackgroundColor=""
+    app:cardElevation="3dp">
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/History_category_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category:"
+            style="@style/text_style_02"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/History_mixed_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mixed"
+            android:layout_marginLeft="10dp"
+            style="@style/text_style_02"
+            app:layout_constraintLeft_toRightOf="@id/History_category_text"/>
+
+        <ImageView
+            android:id="@+id/History_dots_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/History_category_text"
+            android:src="@drawable/ic_dots"/>
+
+        <TextView
+            android:id="@+id/History_answers_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/History_category_text"
+            android:text="Correct answers:"
+            style="@style/text_style_03"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/History_count_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/History_category_text"
+            app:layout_constraintLeft_toRightOf="@id/History_answers_text"
+            android:layout_marginLeft="10dp"
+            android:text="8/10"
+            style="@style/text_style_03"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/History_diff_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/History_answers_text"
+            android:text="Difficulty:"
+            style="@style/text_style_03"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/History_diff_type_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/History_answers_text"
+            app:layout_constraintLeft_toRightOf="@id/History_diff_text"
+            android:layout_marginLeft="10dp"
+            android:text="All"
+            style="@style/text_style_03"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/History_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="20 august 2020 | 03:08 "
+            android:textSize="15sp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.cardview.widget.CardView>

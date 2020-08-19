@@ -3,15 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+
     tools:context=".UI.fragments.SettingsFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_margin="20dp"
         android:text="Settings"
         android:textColor="@color/Black"
-        android:layout_margin="12dp"
         android:textSize="40sp" />
+
+    <View
+        android:background="@color/Gray"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        style="@style/text_style_01"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:gravity="start|center"
+        android:padding="20dp"
+        android:text="Share this app" />
+
+    <View
+        android:background="@color/Gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        style="@style/text_style_01"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:gravity="start|center"
+        android:padding="20dp"
+        android:text="Rate us" />
+
+    <View
+        android:background="@color/Gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        style="@style/text_style_01"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:gravity="start|center"
+        android:padding="20dp"
+        android:text="Leave feedback" />
+
+    <View
+        android:background="@color/Gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        style="@style/text_style_01"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:gravity="start|center"
+        android:padding="20dp"
+        android:text="Clear history" />
+
+    <View
+        android:background="@color/Gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
 
 </LinearLayout>
