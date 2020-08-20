@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     tools:context=".UI.fragments.HistoryFragment">
 
     <LinearLayout
@@ -17,6 +16,7 @@
             android:layout_height="wrap_content"
             android:text="History"
             android:textColor="@color/Black"
+            android:layout_margin="20dp"
             android:textSize="40sp" />
 
         <androidx.recyclerview.widget.RecyclerView

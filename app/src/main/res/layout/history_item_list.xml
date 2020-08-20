@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_margin="10dp"
     android:elevation="10dp"
     app:cardBackgroundColor="#B2D8E5F3"
     app:cardCornerRadius="16dp"
@@ -30,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="Mixed"
-            app:layout_constraintLeft_toRightOf="@id/History_category_text" />
+            app:layout_constraintLeft_toRightOf="@id/History_category_text"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/History_dots_image"
@@ -48,7 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Correct answers:"
-            app:layout_constraintTop_toBottomOf="@id/History_category_text" />
+            app:layout_constraintTop_toBottomOf="@id/History_category_text"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/History_count_text"
@@ -68,7 +71,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Difficulty:"
-            app:layout_constraintTop_toBottomOf="@id/History_answers_text" />
+            app:layout_constraintTop_toBottomOf="@id/History_answers_text"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/History_diff_type_text"
