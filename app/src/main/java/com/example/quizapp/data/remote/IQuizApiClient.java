@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface IQuizApiClient {
 
-    void getQuestions (QuestionsCallback callback);
+    void getQuestions (
+            int amountCount,
+            String category,
+            String difficulty,
+            QuestionsCallback callback);
 
    interface QuestionsCallback{
        void onSuccess(List<Questions> questions);

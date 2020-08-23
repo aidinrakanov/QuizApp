@@ -1,5 +1,7 @@
 package com.example.quizapp.data.remote;
 
+import android.util.Log;
+
 import com.example.quizapp.models.QuizResponse;
 
 import retrofit2.Call;
@@ -20,10 +22,14 @@ public class QuizApiClient implements IQuizApiClient {
 
     QuizApi client = retrofit.create(QuizApi.class);
 
+
+
     @Override
-    public void getQuestions(final QuestionsCallback callback) {
+    public void getQuestions(int amountCount, String category, String difficulty,
+                                         QuestionsCallback callback) {
         Call<QuizResponse> call = client.getQuestions(10,
                 null, null);
+        Log.d("ololo", "url " + call.request().url());
         call.enqueue(new Callback<QuizResponse>() {
             @Override
             public void onResponse(Call<QuizResponse> call, Response<QuizResponse> response) {

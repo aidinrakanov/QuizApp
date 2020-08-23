@@ -3,6 +3,7 @@ package com.example.quizapp.UI.fragments;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,11 +13,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.example.quizapp.MainViewModel;
+import com.example.quizapp.QuizActivity;
+import com.example.quizapp.UI.ViewModels.MainViewModel;
 import com.example.quizapp.R;
 import com.google.android.material.slider.Slider;
 
@@ -26,6 +29,10 @@ public class MainFragment extends Fragment {
     private Slider slider;
     private Spinner spinnerCategory,spinnerDifficulty;
     private Button start;
+    private TextView amount;
+    String category , difficulty;
+    int amountCount;
+    public static final int SLIDER_DATA = 5;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -51,15 +58,65 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        slider = view.findViewById(R.id.slider);
-        spinnerCategory = view.findViewById(R.id.spinner_category);
-        spinnerDifficulty = view.findViewById(R.id.spinner_difficulty);
-        start = view.findViewById(R.id.button_start);
+        initViews(view);
+        spinner();
+        sliderInit();
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getContext(), QuizActivity.class);
+                intent.putExtra("category", category);
+                intent.putExtra("difficulty", difficulty);
+                intent.putExtra("slider", amountCount);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void sliderInit() {
+            slider.addOnChangeListener(new Slider.OnChangeListener() {
+                @Override
+                public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                    amountCount = (int)slider.getValue();
+                    amount.setText(String.valueOf(amountCount));
+                }
+            });
+    }
+
+    private void spinner() {
+        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                category = adapterView.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinnerDifficulty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                difficulty = adapterView.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
     }
+
+
+
+    private void initViews(View view) {
+        slider = view.findViewById(R.id.slider);
+        amount = view.findViewById(R.id.text_amount);
+        spinnerCategory = view.findViewById(R.id.spinner_category);
+        spinnerDifficulty = view.findViewById(R.id.spinner_difficulty);
+        start = view.findViewById(R.id.button_start);
+    }
+
 }

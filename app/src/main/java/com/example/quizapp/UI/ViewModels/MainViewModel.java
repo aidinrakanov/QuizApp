@@ -1,4 +1,4 @@
-package com.example.quizapp;
+package com.example.quizapp.UI.ViewModels;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
