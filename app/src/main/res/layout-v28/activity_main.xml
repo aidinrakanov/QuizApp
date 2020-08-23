@@ -22,6 +22,7 @@
         android:outlineAmbientShadowColor="@color/without_colour"
         android:outlineSpotShadowColor="@color/without_colour"
         app:itemIconTint="@drawable/bottom_navigation_item"
+        app:itemRippleColor="@color/Light_gray"
         app:itemTextColor="@drawable/bottom_navigation_item"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"

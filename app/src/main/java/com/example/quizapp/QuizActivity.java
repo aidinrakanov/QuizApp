@@ -10,7 +10,7 @@ import com.example.quizapp.models.Questions;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
-    String category , difficulty;
+    String category, difficulty;
     int amountCount;
 
     @Override
@@ -19,6 +19,18 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz_app);
         getData();
         getQuestions();
+    }
+
+    private void getData() {
+        if (getIntent() != null) {
+            amountCount = getIntent().getIntExtra("slider", 1);
+            category = getIntent().getStringExtra("category");
+            difficulty = getIntent().getStringExtra("difficulty");
+
+            if (category.equals("Any Category")) {
+                category = null;
+            }
+        }
     }
 
     private void getQuestions() {
@@ -34,14 +46,5 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void getData() {
-        if (getIntent() != null){
-            amountCount = getIntent().getIntExtra("slider",1);
-            category = getIntent().getStringExtra("category");
-            difficulty = getIntent().getStringExtra("difficulty");
-        }
-    }
-
 
 }

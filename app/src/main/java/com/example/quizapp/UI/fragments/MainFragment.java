@@ -27,10 +27,10 @@ public class MainFragment extends Fragment {
 
     private MainViewModel mViewModel;
     private Slider slider;
-    private Spinner spinnerCategory,spinnerDifficulty;
+    private Spinner spinnerCategory, spinnerDifficulty;
     private Button start;
     private TextView amount;
-    String category , difficulty;
+    String category, difficulty;
     int amountCount;
     public static final int SLIDER_DATA = 5;
 
@@ -74,13 +74,13 @@ public class MainFragment extends Fragment {
     }
 
     private void sliderInit() {
-            slider.addOnChangeListener(new Slider.OnChangeListener() {
-                @Override
-                public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-                    amountCount = (int)slider.getValue();
-                    amount.setText(String.valueOf(amountCount));
-                }
-            });
+        slider.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                amountCount = (int) slider.getValue();
+                amount.setText(String.valueOf(amountCount));
+            }
+        });
     }
 
     private void spinner() {
@@ -108,7 +108,6 @@ public class MainFragment extends Fragment {
             }
         });
     }
-
 
 
     private void initViews(View view) {
