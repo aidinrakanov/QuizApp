@@ -1,4 +1,4 @@
-package com.example.quizapp.UI.fragments;
+package com.example.quizapp.UI.main;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -18,8 +18,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.quizapp.QuizActivity;
-import com.example.quizapp.UI.ViewModels.MainViewModel;
+import com.example.quizapp.UI.quiz.QuizActivity;
 import com.example.quizapp.R;
 import com.google.android.material.slider.Slider;
 
@@ -32,7 +31,6 @@ public class MainFragment extends Fragment {
     private TextView amount;
     String category, difficulty;
     int amountCount;
-    public static final int SLIDER_DATA = 5;
 
     public static MainFragment newInstance() {
         return new MainFragment();

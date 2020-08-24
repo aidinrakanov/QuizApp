@@ -1,4 +1,4 @@
-package com.example.quizapp.UI.ViewModels;
+package com.example.quizapp.UI.splash;
 
 import android.content.Intent;
 import android.os.Bundle;

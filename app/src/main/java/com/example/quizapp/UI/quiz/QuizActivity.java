@@ -1,9 +1,11 @@
-package com.example.quizapp;
+package com.example.quizapp.UI.quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.quizapp.QuizApp;
+import com.example.quizapp.R;
 import com.example.quizapp.data.remote.IQuizApiClient;
 import com.example.quizapp.models.Questions;
 

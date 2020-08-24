@@ -6,9 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.example.quizapp.UI.fragments.MainFragment;
 import com.example.quizapp.adapters.MainPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

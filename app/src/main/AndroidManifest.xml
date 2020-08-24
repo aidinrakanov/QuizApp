@@ -12,10 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".UI.quiz.QuizActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity
-            android:name=".UI.ViewModels.SplashScreen"
+            android:name=".UI.splash.SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
