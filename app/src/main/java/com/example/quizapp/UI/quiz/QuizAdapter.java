@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -49,6 +50,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView amount, main;
         Button first, second, third, fourth, b_true, b_false;
+        LinearLayout multi_linear, boolean_linear;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +63,9 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> {
             fourth = itemView.findViewById(R.id.quiz_fourth_answer);
             b_true = itemView.findViewById(R.id.quiz_true);
             b_false = itemView.findViewById(R.id.quiz_false);
+            multi_linear = itemView.findViewById(R.id.quiz_multi_choice);
+            boolean_linear = itemView.findViewById(R.id.quiz_true_or_false);
+
         }
 
         public void bind(QuizResponse questions) {
