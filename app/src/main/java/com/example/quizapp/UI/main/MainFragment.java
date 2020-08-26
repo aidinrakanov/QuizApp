@@ -46,7 +46,7 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        mViewModel.message.observe(this, new Observer<String>() {
+        mViewModel.message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
             }
@@ -63,10 +63,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), QuizActivity.class);
-                intent.putExtra("category", category);
-                intent.putExtra("difficulty", difficulty);
-                intent.putExtra("slider", amountCount);
-                startActivity(intent);
+                QuizActivity.start(getContext(),amountCount, category, difficulty);
             }
         });
     }
