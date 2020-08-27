@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -22,7 +26,7 @@ import com.example.quizapp.models.QuizResponse;
 
 import java.util.List;
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity implements QuizAdapter.Listener {
 
     public static final String EXTRA_AMOUNT = "slider";
     public static final String EXTRA_CATEGORY = "category";
@@ -42,27 +46,37 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         initViews();
         viewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        recyclerView.setLayoutManager(new LinearLayoutManager
-                (this, RecyclerView.HORIZONTAL, false));
+        recyclerSets();
         getData();
         getQuestions();
         getPosition();
         viewModel.init(amountCount , category , difficulty);
-        viewModel.currentQuestionPosition.observe(this, new Observer<Integer>() {
+        viewModel.questions.observe(this, new Observer<List<Questions>>() {
             @Override
-            public void onChanged(Integer integer) {
-                recyclerView.scrollToPosition(integer);
+            public void onChanged(List<Questions> questions) {
+                adapter.setQuestions(questions);
             }
         });
+    }
 
-
+    private void recyclerSets() {
+        adapter = new QuizAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager
+                (this, RecyclerView.HORIZONTAL, false));
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return false;
+            }
+        });
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
     }
 
 
-
-
     private void initViews() {
-        RecyclerView recyclerView = findViewById(R.id.quiz_recycler);
+        recyclerView = findViewById(R.id.quiz_recycler);
         category_text = findViewById(R.id.quiz_category_text);
         progressBar = findViewById(R.id.progress_bar);
         quiz_amount = findViewById(R.id.quiz_amount);
@@ -75,6 +89,7 @@ public class QuizActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(Integer integer) {
+                recyclerView.smoothScrollToPosition(integer);
                 progressBar.setProgress(integer + 1 );
                 progressBar.setMax(amountCount);
                 quiz_amount.setText((integer + 1) + "/" + amountCount);
@@ -119,5 +134,8 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onAnswerClick(int position, int selectAnswerPosition) {
+        viewModel.onAnswerClick(position,selectAnswerPosition);
+    }
 }

@@ -29,8 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/quiz_category_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
-        android:progressDrawable="@drawable/progress_background"/>
+        android:layout_marginTop="30dp"/>
 
     <TextView
         android:id="@+id/quiz_amount"

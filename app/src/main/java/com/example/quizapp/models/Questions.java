@@ -14,6 +14,25 @@ public class Questions {
     @SerializedName("incorrect_answers")
     private List<String> incorrectAnswers;
 
+    private List<String> answers;
+    private int selectAnswerPosition;
+
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+    }
+
+    public int getSelectAnswerPosition() {
+        return selectAnswerPosition;
+    }
+
+    public void setSelectAnswerPosition(int selectAnswerPosition) {
+        this.selectAnswerPosition = selectAnswerPosition;
+    }
+
     public String getCategory() { return category; }
 
     public void setCategory(String category) { this.category = category; }

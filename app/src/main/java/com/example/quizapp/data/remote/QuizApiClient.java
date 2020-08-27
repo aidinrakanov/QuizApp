@@ -29,7 +29,6 @@ public class QuizApiClient implements IQuizApiClient {
                                          QuestionsCallback callback) {
         Call<QuizResponse> call = client.getQuestions(10,
                 null, null);
-        Log.d("ololo", "url " + call.request().url());
         call.enqueue(new Callback<QuizResponse>() {
             @Override
             public void onResponse(Call<QuizResponse> call, Response<QuizResponse> response) {
