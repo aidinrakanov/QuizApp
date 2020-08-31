@@ -32,6 +32,7 @@ public class MainFragment extends Fragment {
     String category, difficulty;
     int amountCount;
 
+
     public static MainFragment newInstance() {
         return new MainFragment();
     }
@@ -62,7 +63,6 @@ public class MainFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), QuizActivity.class);
                 QuizActivity.start(getContext(),amountCount, category, difficulty);
             }
         });

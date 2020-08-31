@@ -7,7 +7,8 @@
     <string name="questions_amount">Questions amount:</string>
     <string name="quiz">Quiz</string>
     <string-array name="difficulty">
-        <item>Easy</item>
+        <item>Any Difficulty</item>
+        <item>easy</item>
         <item>Medium</item>
         <item>Hard</item>
     </string-array>

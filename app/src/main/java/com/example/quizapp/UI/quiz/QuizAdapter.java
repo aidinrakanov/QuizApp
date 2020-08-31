@@ -1,5 +1,6 @@
 package com.example.quizapp.UI.quiz;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +20,13 @@ import java.util.List;
 public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    List<Questions> models = new ArrayList<>();
+    List<Questions> models;
     private Listener listener;
 
-    public QuizAdapter(List<Questions> models) {
-        this.models = models;
-    }
-    public QuizAdapter(Listener listener) {
+
+    public QuizAdapter(List<Questions> models,Listener listener) {
         this.listener = listener;
+        this.models = models;
     }
 
 
@@ -61,15 +61,15 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     public class Questions_ViewHolder extends RecyclerView.ViewHolder {
-        TextView amount, main;
+        TextView main;
         Button first, second, third, fourth, b_true, b_false;
         LinearLayout multi_linear, boolean_linear;
+
         private Listener listener;
 
         public Questions_ViewHolder(@NonNull View itemView,Listener listener) {
             super(itemView);
             this.listener = listener;
-            amount = itemView.findViewById(R.id.quiz_amount);
             main = itemView.findViewById(R.id.quiz_main_text);
             first = itemView.findViewById(R.id.quiz_first_answer);
             second = itemView.findViewById(R.id.quiz_second_answer);
@@ -84,7 +84,20 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void onBind(Questions questions) {
             main.setText(questions.getQuestion());
-            amount.setText(getAdapterPosition());
+            if (questions.getType().equals("multiple")) {
+                multi_linear.setVisibility(View.VISIBLE);
+                boolean_linear.setVisibility(View.GONE);
+                first.setText(questions.getAnswers().get(0));
+                second.setText(questions.getAnswers().get(1));
+                third.setText(questions.getAnswers().get(2));
+                fourth.setText(questions.getAnswers().get(3));
+            } else if (questions.getType().equals("boolean")) {
+                boolean_linear.setVisibility(View.VISIBLE);
+                multi_linear.setVisibility(View.GONE);
+                b_true.setText(questions.getAnswers().get(0));
+                b_false.setText(questions.getAnswers().get(1));
+            }
+            Log.d("ololo", questions.getAnswers().toString());
         }
 
     }

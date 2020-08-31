@@ -57,7 +57,8 @@ public class Questions {
 
     public void setIncorrectAnswers(List<String> incorrectAnswers) { this.incorrectAnswers = incorrectAnswers; }
 
-    public Questions(String category, String type, String difficulty, String question, String correctAnswers, List<String> incorrectAnswers) {
+    public Questions(String category, String type, String difficulty,
+                     String question, String correctAnswers, List<String> incorrectAnswers) {
         this.category = category;
         this.type = type;
         this.difficulty = difficulty;

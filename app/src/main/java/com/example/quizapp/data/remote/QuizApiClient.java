@@ -27,8 +27,8 @@ public class QuizApiClient implements IQuizApiClient {
     @Override
     public void getQuestions(int amountCount, String category, String difficulty,
                                          QuestionsCallback callback) {
-        Call<QuizResponse> call = client.getQuestions(10,
-                null, null);
+        Call<QuizResponse> call = client.getQuestions(amountCount,
+                category, difficulty);
         call.enqueue(new Callback<QuizResponse>() {
             @Override
             public void onResponse(Call<QuizResponse> call, Response<QuizResponse> response) {
