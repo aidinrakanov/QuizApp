@@ -52,6 +52,7 @@ public class QuizViewModel extends ViewModel {
     }
 
     void onSkipClick(){
+
         currentQuestionPosition.setValue(currentQuestionPosition.getValue() + 1);
     }
 

@@ -144,9 +144,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
             if (difficulty.equals("Any Difficulty")) {
                 difficulty = null;
             }
-
         }
-
     }
 
     private void getQuestions() {

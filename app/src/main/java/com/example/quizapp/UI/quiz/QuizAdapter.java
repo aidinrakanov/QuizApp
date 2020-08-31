@@ -1,6 +1,6 @@
 package com.example.quizapp.UI.quiz;
 
-import android.util.Log;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quizapp.R;
 import com.example.quizapp.models.Questions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -24,9 +23,10 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Listener listener;
 
 
-    public QuizAdapter(List<Questions> models,Listener listener) {
+    public QuizAdapter(List<Questions> models, Listener listener) {
         this.listener = listener;
         this.models = models;
+        notifyDataSetChanged();
     }
 
 
@@ -41,9 +41,8 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof Questions_ViewHolder){
-            ((Questions_ViewHolder)holder).onBind(models.get(position));
-
+        if (holder instanceof Questions_ViewHolder) {
+            ((Questions_ViewHolder) holder).onBind(models.get(position));
         }
     }
 
@@ -53,7 +52,7 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return models.size();
     }
 
-    public void setQuestions(List<Questions> questions){
+    public void setQuestions(List<Questions> questions) {
         models.clear();
         models.addAll(questions);
         notifyDataSetChanged();
@@ -64,10 +63,10 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView main;
         Button first, second, third, fourth, b_true, b_false;
         LinearLayout multi_linear, boolean_linear;
-
+        private int position;
         private Listener listener;
 
-        public Questions_ViewHolder(@NonNull View itemView,Listener listener) {
+        public Questions_ViewHolder(@NonNull View itemView, Listener listener) {
             super(itemView);
             this.listener = listener;
             main = itemView.findViewById(R.id.quiz_main_text);
@@ -83,26 +82,26 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void onBind(Questions questions) {
-            main.setText(questions.getQuestion());
+
+
+            main.setText(Html.fromHtml(questions.getQuestion()));
             if (questions.getType().equals("multiple")) {
                 multi_linear.setVisibility(View.VISIBLE);
                 boolean_linear.setVisibility(View.GONE);
-                first.setText(questions.getAnswers().get(0));
-                second.setText(questions.getAnswers().get(1));
-                third.setText(questions.getAnswers().get(2));
-                fourth.setText(questions.getAnswers().get(3));
+                first.setText(Html.fromHtml(questions.getAnswers().get(0)));
+                second.setText(Html.fromHtml(questions.getAnswers().get(1)));
+                third.setText(Html.fromHtml(questions.getAnswers().get(2)));
+                fourth.setText(Html.fromHtml(questions.getAnswers().get(3)));
             } else if (questions.getType().equals("boolean")) {
                 boolean_linear.setVisibility(View.VISIBLE);
                 multi_linear.setVisibility(View.GONE);
-                b_true.setText(questions.getAnswers().get(0));
-                b_false.setText(questions.getAnswers().get(1));
+                b_true.setText(Html.fromHtml(questions.getAnswers().get(0)));
+                b_false.setText(Html.fromHtml(questions.getAnswers().get(1)));
             }
-            Log.d("ololo", questions.getAnswers().toString());
         }
-
     }
 
-    public interface Listener{
+    public interface Listener {
         void onAnswerClick(int position, int selectAnswerPosition);
     }
 }
