@@ -20,6 +20,7 @@
         style="@style/text_style_01"/>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/quiz_true_or_false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,7 +63,7 @@
 
         <Button
             android:id="@+id/quiz_first_answer"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="50dp"
             android:textSize="18sp"
             android:background="@drawable/button_rounded_quiz"
@@ -70,7 +71,7 @@
 
         <Button
             android:id="@+id/quiz_second_answer"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:textSize="18sp"
@@ -79,7 +80,7 @@
 
         <Button
             android:id="@+id/quiz_third_answer"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:textSize="18sp"
@@ -88,7 +89,7 @@
 
         <Button
             android:id="@+id/quiz_fourth_answer"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:textSize="18sp"

@@ -69,6 +69,7 @@ public class MainFragment extends Fragment {
     }
 
     private void sliderInit() {
+        slider.setValue(5);
         slider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {

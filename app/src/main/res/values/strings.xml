@@ -3,7 +3,7 @@
     <string name="start">Start</string>
     <string name="difficulty">Difficulty</string>
     <string name="category">Category</string>
-    <string name="_10">10</string>
+    <string name="_10">5</string>
     <string name="questions_amount">Questions amount:</string>
     <string name="quiz">Quiz</string>
     <string-array name="difficulty">

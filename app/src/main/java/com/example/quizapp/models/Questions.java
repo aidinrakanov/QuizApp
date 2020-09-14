@@ -25,7 +25,7 @@ public class Questions {
         this.answers = answers;
     }
 
-    public int getSelectAnswerPosition() {
+    public Integer getSelectAnswerPosition() {
         return selectAnswerPosition;
     }
 

@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quizapp.R;
 import com.example.quizapp.models.Questions;
 import com.example.quizapp.models.QuizResponse;
+import com.example.quizapp.models.QuizResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
-    List<QuizResponse> list = new ArrayList<>();
+    List<QuizResult> list = new ArrayList<>();
 
-    public HistoryAdapter(List<QuizResponse> list) {
+    public HistoryAdapter(List<QuizResult> list) {
         this.list = list;
     }
 
@@ -32,7 +33,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.historyBind(list.get(position));
     }
 
     @Override
@@ -40,11 +41,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         return list.size();
     }
 
+
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView history_category;
         private TextView history_correctAnswers;
         private TextView history_difficulty;
         private TextView history_time;
+
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             history_category = itemView.findViewById(R.id.History_mixed_text);
@@ -53,11 +59,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             history_time = itemView.findViewById(R.id.History_date);
         }
 
-        public void historyBind(Questions questions){
-            history_category.setText(questions.getCategory());
-            history_correctAnswers.setText(questions.getCorrectAnswers());
-            history_difficulty.setText(questions.getDifficulty());
-//            history_time.setText(questions.get);
+        public void historyBind(QuizResult quizResult){
+            history_category.setText(quizResult.getCategory());
+            history_correctAnswers.setText(quizResult.getCorrectAnswerResult());
+            history_difficulty.setText(quizResult.getDifficulty());
+            history_time.setText(String.valueOf(quizResult.getCreatedAt()));
+
         }
     }
 }
