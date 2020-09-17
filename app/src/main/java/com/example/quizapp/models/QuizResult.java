@@ -11,21 +11,31 @@ import com.example.quizapp.db.convertor.QuestionConverter;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+
+@Entity(tableName = "quiz_result")
 public class QuizResult {
 
     @PrimaryKey(autoGenerate = true)
     private  int id;
+
+    @ColumnInfo(name = "category")
     private String category;
+
+    @ColumnInfo(name = "difficulty")
     private String difficulty;
+
     @ColumnInfo(name = "correct_answers_result")
     private int correctAnswerResult;
+
     @TypeConverters({QuestionConverter.class})
     private List<Questions> questions;
-    @TypeConverters({DateConverter.class})
-    private Date createdAt;
 
-    public QuizResult(int id, String category, String difficulty, int correctAnswerResult, List<Questions> questions, Date createdAt) {
+    @TypeConverters({DateConverter.class})
+    private String createdAt;
+
+    public QuizResult(int id, String category,
+                      String difficulty, int correctAnswerResult,
+                      List<Questions> questions, String createdAt) {
         this.id = id;
         this.category = category;
         this.difficulty = difficulty;
@@ -33,6 +43,7 @@ public class QuizResult {
         this.questions = questions;
         this.createdAt = createdAt;
     }
+
 
     public int getId() {
         return id;
@@ -74,11 +85,11 @@ public class QuizResult {
         this.questions = questions;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 }

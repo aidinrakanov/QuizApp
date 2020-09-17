@@ -31,7 +31,12 @@ public class QuizApp extends Application {
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
-        repository = new  QuizRepository(new QuizApiClient(), new HistoryStorage(), quizDatabase.quizDao());
+        repository = new  QuizRepository(
+                     new QuizApiClient(),
+                     new HistoryStorage(quizDatabase.quizDao()),
+                     quizDatabase.quizDao());
+
+
         quizApiClient = repository;
         historyStorage = repository;
 

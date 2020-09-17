@@ -8,9 +8,9 @@
     <string name="quiz">Quiz</string>
     <string-array name="difficulty">
         <item>Any Difficulty</item>
-        <item>easy</item>
-        <item>medium</item>
-        <item>hard</item>
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
     </string-array>
 
     <string-array name="category">

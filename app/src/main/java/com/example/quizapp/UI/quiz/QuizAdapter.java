@@ -1,6 +1,7 @@
 package com.example.quizapp.UI.quiz;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,7 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private int position;
         private Listener listener;
 
+
         public Questions_ViewHolder(@NonNull View itemView, Listener listener) {
             super(itemView);
             this.listener = listener;
@@ -82,9 +84,31 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         }
 
+        private void setButton(Boolean enabled) {
+            first.setEnabled(enabled);
+            second.setEnabled(enabled);
+            third.setEnabled(enabled);
+            fourth.setEnabled(enabled);
+            b_true.setEnabled(enabled);
+            b_false.setEnabled(enabled);
+        }
+
+        private void clickListener() {
+            first.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
+            second.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
+            third.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 2));
+            fourth.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 3));
+            b_true.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
+            b_false.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
+        }
 
         public void onBind(Questions questions, int position) {
             reset();
+            if (questions.getSelectAnswerPosition() != null) {
+                setButton(true);
+            } else {
+                setButton(false);
+            }
             this.position = position;
             main.setText(Html.fromHtml(questions.getQuestion()));
             if (questions.getType().equals("multiple")) {
@@ -100,35 +124,22 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 b_true.setText(Html.fromHtml(questions.getAnswers().get(0)));
                 b_false.setText(Html.fromHtml(questions.getAnswers().get(1)));
             }
-            btn_state(questions);
+            if (questions.getSelectAnswerPosition() != null) {
+                btn_state(questions);
+            }
         }
 
-        @SuppressLint("ResourceAsColor")
-        public void reset() {
-            first.setBackgroundResource(R.drawable.button_rounded_quiz);
-            second.setBackgroundResource(R.drawable.button_rounded_quiz);
-            third.setBackgroundResource(R.drawable.button_rounded_quiz);
-            fourth.setBackgroundResource(R.drawable.button_rounded_quiz);
-            b_true.setBackgroundResource(R.drawable.button_rounded_quiz);
-            b_false.setBackgroundResource(R.drawable.button_rounded_quiz);
-
-            first.setTextColor(itemView.getResources().getColor(R.color.Black));
-            second.setTextColor(itemView.getResources().getColor(R.color.Black));
-            third.setTextColor(itemView.getResources().getColor(R.color.Black));
-            fourth.setTextColor(itemView.getResources().getColor(R.color.Black));
-            b_true.setTextColor(itemView.getResources().getColor(R.color.Black));
-            b_false.setTextColor(itemView.getResources().getColor(R.color.Black));
+        private void reset() {
+            resetAnswerButtons(first, second, third, fourth, b_true, b_false);
         }
 
-
-        private void clickListener() {
-            first.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
-            second.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
-            third.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 2));
-            fourth.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 3));
-            b_true.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
-            b_false.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
+        private void resetAnswerButtons(Button... buttons) {
+            for (Button button : buttons) {
+                button.setBackgroundResource(R.drawable.button_rounded_quiz);
+                button.setTextColor(itemView.getResources().getColor(R.color.Black));
+            }
         }
+
 
         @SuppressLint("ResourceAsColor")
         public void btn_state(Questions questions) {
@@ -140,6 +151,11 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             b_true.setBackgroundResource(R.color.Green);
                             first.setTextColor(R.color.White);
                             b_true.setTextColor(R.color.White);
+                        } else {
+                            first.setBackgroundResource(R.color.Red);
+                            b_true.setBackgroundResource(R.color.Red);
+                            first.setTextColor(Color.WHITE);
+                            b_true.setTextColor(Color.WHITE);
                         }
                         break;
                     case 1:
@@ -148,6 +164,11 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             b_false.setBackgroundResource(R.color.Green);
                             second.setTextColor(R.color.White);
                             b_false.setTextColor(R.color.White);
+                        } else {
+                            second.setBackgroundResource(R.color.Red);
+                            b_false.setBackgroundResource(R.color.Red);
+                            second.setTextColor(Color.WHITE);
+                            b_false.setTextColor(Color.WHITE);
                         }
                         break;
                     case 2:
@@ -155,18 +176,25 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             third.setBackgroundResource(R.color.Green);
                             third.setTextColor(R.color.White);
 
+                        } else {
+                            third.setBackgroundResource(R.color.Red);
+                            third.setTextColor(Color.WHITE);
                         }
                         break;
                     case 3:
                         if (questions.getCorrectAnswers().equals(questions.getAnswers().get(3))) {
                             fourth.setBackgroundResource(R.color.Green);
                             fourth.setTextColor(R.color.White);
+                        } else {
+                            fourth.setBackgroundResource(R.color.Red);
+                            fourth.setTextColor(Color.WHITE);
                         }
                         break;
                 }
             }
         }
     }
+
     public interface Listener {
         void onAnswerClick(int position, int selectAnswerPosition);
     }

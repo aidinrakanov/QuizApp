@@ -3,11 +3,22 @@ package com.example.quizapp.models;
 import java.util.Date;
 
 public class History {
+    private int id;
     private String category;
     private String difficulty;
-    private int correctAnswer;
     private int amounts;
-    private int id;
+    private int correctAnswer;
+    private String createAt;
+
+    public History(int id, String category, String difficulty,
+                   int correctAnswer, int amounts, String createdAt) {
+        this.id = id;
+        this.category = category;
+        this.difficulty = difficulty;
+        this.correctAnswer = correctAnswer;
+        this.amounts = amounts;
+        this.createAt = createdAt;
+    }
 
     public int getId() {
         return id;

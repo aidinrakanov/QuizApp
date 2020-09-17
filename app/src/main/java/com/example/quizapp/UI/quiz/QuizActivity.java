@@ -26,6 +26,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.quizapp.QuizApp;
 import com.example.quizapp.R;
 import com.example.quizapp.UI.result.ResultActivity;
+import com.example.quizapp.data.QuizRepository;
 import com.example.quizapp.data.remote.IQuizApiClient;
 import com.example.quizapp.models.Questions;
 import com.example.quizapp.models.QuizResponse;
@@ -40,11 +41,13 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
     public static final String EXTRA_CATEGORY = "category";
     public static final String EXTRA_DIFFICULTY = "difficulty";
     RecyclerView recyclerView;
+    private QuizRepository quizRepository = QuizApp.repository;
 
-    String category, difficulty;
+    String difficulty;
+    int category;
     int amountCount;
     private QuizViewModel viewModel;
-    TextView category_text, quiz_amount;
+    TextView category_text, quiz_amount, tvTime;
     QuizAdapter adapter;
     ProgressBar progressBar;
     Button skip, finish_btn;
@@ -52,6 +55,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
     LottieAnimationView lottie;
     List<Questions> list = new ArrayList<>();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,23 +66,33 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
         load();
         recyclerSets();
 
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewModel.onSkipClick();
-            }
-        });
+        viewModel.finishEvent.observe(this, aVoid -> finish());
+        viewModel.openResultEvent.observe(this, integer ->
+                ResultActivity.start(QuizActivity.this, integer)
+        );
+        viewModel.timeDown.observe(this, aLong -> tvTime.setText(aLong.toString()));
+
+        skip.setOnClickListener(view -> viewModel.onSkipClick());
+//        viewModel.finishEvent.observe(this, new Observer<Void>() {
+//            @Override
+//            public void onChanged(Void aVoid) {
+//                finish();
+//            }
+//        });
     }
-
-
 
 
     @SuppressLint("ClickableViewAccessibility")
     private void recyclerSets() {
         adapter = new QuizAdapter(list, this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager
-                (this, RecyclerView.HORIZONTAL, false));
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        recyclerView.setLayoutManager(manager);
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -98,13 +112,12 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
         skip = findViewById(R.id.quiz_skip);
         onBack = findViewById(R.id.quiz_back);
         lottie = findViewById(R.id.lottie_load);
+        tvTime = findViewById(R.id.tv_time);
         finish_btn = findViewById(R.id.quiz_finish);
         finish_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(QuizActivity.this, ResultActivity.class));
-                finish();
 
             }
         });
@@ -114,32 +127,39 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
     private void getData() {
         if (getIntent() != null) {
             amountCount = getIntent().getIntExtra(EXTRA_AMOUNT, 1);
-            category = getIntent().getStringExtra(EXTRA_CATEGORY);
+            category = getIntent().getIntExtra(EXTRA_CATEGORY, 0);
             difficulty = getIntent().getStringExtra(EXTRA_DIFFICULTY);
             if (amountCount == 0) {
                 amountCount = 5;
             }
-            if (category.equals("Any Category")) {
-                category = null;
+            if (category == 8) {
+                category = 0;
             }
-
-            if (difficulty.equals("Any Difficulty")) {
-                difficulty = null;
+            if (difficulty != null) {
+                if (difficulty.equals("Any Difficulty")) {
+                    difficulty = null;
+                } else {
+                    difficulty = difficulty.toLowerCase();
+                }
             }
             getQuestions();
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void getPosition() {
         viewModel.currentQuestionPosition.observe(this, integer -> {
             if (integer != null) {
+                viewModel.startTimeDown();
+                viewModel.delayTime(recyclerView, integer);
                 quiz_amount.setText((integer + 1) + "/" + amountCount);
                 recyclerView.smoothScrollToPosition(integer);
                 progressBar.setProgress(integer + 1);
                 progressBar.setMax(amountCount);
-                category_text.setText(String.valueOf(category));
-                if (category_text.getText().equals("null")){
-                    category_text.setText("Any Category"); }
+                category_text.setText(list.get(integer).getCategory());
+                if (category_text.getText().equals("null")) {
+                    category_text.setText("Any Category");
+                }
                 if (integer + 1 == list.size()) {
                     skip.setVisibility(View.GONE);
                     finish_btn.setVisibility(View.VISIBLE);
@@ -149,7 +169,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
 
     }
 
-    public static void start(Context context, int amountCount, String category, String difficulty) {
+    public static void start(Context context, int amountCount, int category, String difficulty) {
         Intent intent = new Intent(context, QuizActivity.class);
         intent.putExtra(EXTRA_AMOUNT, amountCount);
         intent.putExtra(EXTRA_CATEGORY, category);
@@ -177,21 +197,17 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
         viewModel.onBackpessed();
     }
 
-    public void load(){
-        viewModel.loading.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean){
-                    lottie.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
-                    quiz_amount.setVisibility(View.GONE);
+    public void load() {
+        viewModel.loading.observe(this, aBoolean -> {
+            if (aBoolean) {
+                lottie.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                quiz_amount.setVisibility(View.GONE);
 
-                }else {
-                    lottie.setVisibility(View.GONE);
-                    progressBar.setVisibility(View.VISIBLE);
-                    quiz_amount.setVisibility(View.VISIBLE);
-
-                }
+            } else {
+                lottie.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
+                quiz_amount.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -64,6 +64,7 @@
         android:layout_height="1dp"/>
 
     <TextView
+        android:id="@+id/clear_history"
         style="@style/text_style_01"
         android:layout_width="match_parent"
         android:layout_height="80dp"

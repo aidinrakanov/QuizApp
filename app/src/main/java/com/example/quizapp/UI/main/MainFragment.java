@@ -29,7 +29,8 @@ public class MainFragment extends Fragment {
     private Spinner spinnerCategory, spinnerDifficulty;
     private Button start;
     private TextView amount;
-    String category, difficulty;
+    String difficulty;
+    int category;
     int amountCount;
 
 
@@ -60,22 +61,14 @@ public class MainFragment extends Fragment {
         initViews(view);
         spinner();
         sliderInit();
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                QuizActivity.start(getContext(),amountCount, category, difficulty);
-            }
-        });
+        start.setOnClickListener(view1 -> QuizActivity.start(getContext(), amountCount, category, difficulty));
     }
 
     private void sliderInit() {
         slider.setValue(5);
-        slider.addOnChangeListener(new Slider.OnChangeListener() {
-            @Override
-            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-                amountCount = (int) slider.getValue();
-                amount.setText(String.valueOf(amountCount));
-            }
+        slider.addOnChangeListener((slider, value, fromUser) -> {
+            amountCount = (int) slider.getValue();
+            amount.setText(String.valueOf(amountCount));
         });
     }
 
@@ -83,7 +76,7 @@ public class MainFragment extends Fragment {
         spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                category = adapterView.getSelectedItem().toString();
+                category = adapterView.getSelectedItemPosition() + 8;
             }
 
             @Override

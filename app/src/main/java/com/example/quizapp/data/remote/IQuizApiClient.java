@@ -9,7 +9,7 @@ public interface IQuizApiClient {
 
     void getQuestions (
             int amountCount,
-            String category,
+            int category,
             String difficulty,
             QuestionsCallback callback);
 
