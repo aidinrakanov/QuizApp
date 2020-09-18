@@ -190,7 +190,6 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
     @Override
     public void onAnswerClick(int position, int selectAnswerPosition) {
         viewModel.onAnswerClick(position, selectAnswerPosition);
-//        viewModel.getAnswers(position);
     }
 
     public void onBackPressed2(View view) {

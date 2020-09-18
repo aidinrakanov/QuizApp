@@ -18,7 +18,7 @@ import com.example.quizapp.models.Questions;
 
 import java.util.List;
 
-public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.Questions_ViewHolder> {
 
 
     List<Questions> models;
@@ -35,18 +35,18 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public Questions_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate
+        View view = LayoutInflater.from
+                (parent.getContext()).inflate
                 (R.layout.quiz_list, parent, false);
         return new Questions_ViewHolder(view, listener);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof Questions_ViewHolder) {
-            ((Questions_ViewHolder) holder).onBind(models.get(position), position);
-        }
+    public void onBindViewHolder(@NonNull Questions_ViewHolder holder, int position) {
+        holder.onBind(models.get(position));
     }
+
 
     @Override
     public int getItemCount() {
@@ -64,13 +64,11 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView main;
         Button first, second, third, fourth, b_true, b_false;
         LinearLayout multi_linear, boolean_linear;
-        private int position;
         private Listener listener;
 
 
         public Questions_ViewHolder(@NonNull View itemView, Listener listener) {
             super(itemView);
-            this.listener = listener;
             main = itemView.findViewById(R.id.quiz_main_text);
             first = itemView.findViewById(R.id.quiz_first_answer);
             second = itemView.findViewById(R.id.quiz_second_answer);
@@ -80,6 +78,7 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             b_false = itemView.findViewById(R.id.quiz_false);
             multi_linear = itemView.findViewById(R.id.quiz_multi_choice);
             boolean_linear = itemView.findViewById(R.id.quiz_true_or_false);
+            this.listener = listener;
             clickListener();
 
         }
@@ -102,14 +101,13 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             b_false.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
         }
 
-        public void onBind(Questions questions, int position) {
+        public void onBind(Questions questions) {
             reset();
-            if (questions.getSelectAnswerPosition() != null) {
+            if (questions.getSelectAnswerPosition() == null) {
                 setButton(true);
             } else {
                 setButton(false);
             }
-            this.position = position;
             main.setText(Html.fromHtml(questions.getQuestion()));
             if (questions.getType().equals("multiple")) {
                 multi_linear.setVisibility(View.VISIBLE);
@@ -172,7 +170,7 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         }
                         break;
                     case 2:
-                        if (questions.getCorrectAnswers().equals(questions.getAnswers().get(2))) {
+                        if (questions.getAnswers().get(2).equals(questions.getCorrectAnswers())) {
                             third.setBackgroundResource(R.color.Green);
                             third.setTextColor(R.color.White);
 
@@ -182,7 +180,7 @@ public class QuizAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         }
                         break;
                     case 3:
-                        if (questions.getCorrectAnswers().equals(questions.getAnswers().get(3))) {
+                        if (questions.getAnswers().get(3).equals(questions.getCorrectAnswers())) {
                             fourth.setBackgroundResource(R.color.Green);
                             fourth.setTextColor(R.color.White);
                         } else {

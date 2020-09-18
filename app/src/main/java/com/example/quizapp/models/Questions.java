@@ -15,7 +15,7 @@ public class Questions {
     private List<String> incorrectAnswers;
 
     private List<String> answers;
-    private int selectAnswerPosition;
+    private Integer selectAnswerPosition;
 
     public List<String> getAnswers() {
         return answers;
