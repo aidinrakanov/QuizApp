@@ -2,7 +2,6 @@ package com.example.quizapp.UI.result;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.quizapp.MainActivity;
 import com.example.quizapp.R;
-import com.example.quizapp.UI.quiz.QuizActivity;
 
 public class ResultActivity extends AppCompatActivity {
 

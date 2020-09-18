@@ -1,5 +1,6 @@
 package com.example.quizapp.UI.history;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             dots.setOnClickListener(v -> listener.onClick(v, getAdapterPosition()));
         }
 
+        @SuppressLint("SetTextI18n")
         public void historyBind(History history) {
             history_category.setText(history.getCategory());
             history_correctAnswers.setText(history.getCorrectAnswer() + "/" + history.getAmounts());

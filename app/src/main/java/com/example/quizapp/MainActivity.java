@@ -22,22 +22,19 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(2);
         bottomNavigationView = findViewById(R.id.bottomNav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.main:
-                        viewPager.setCurrentItem(0, false);
-                        break;
-                    case R.id.history:
-                        viewPager.setCurrentItem(1, false);
-                        break;
-                    case R.id.settings:
-                        viewPager.setCurrentItem(2, false);
-                        break;
-                }
-                return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.main:
+                    viewPager.setCurrentItem(0, false);
+                    break;
+                case R.id.history:
+                    viewPager.setCurrentItem(1, false);
+                    break;
+                case R.id.settings:
+                    viewPager.setCurrentItem(2, false);
+                    break;
             }
+            return true;
         });
 
     }

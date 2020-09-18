@@ -1,6 +1,6 @@
 package com.example.quizapp.UI.quiz;
 
-import android.annotation.SuppressLint;
+
 import android.os.CountDownTimer;
 
 import androidx.lifecycle.MutableLiveData;
@@ -12,14 +12,9 @@ import com.example.quizapp.QuizApp;
 import com.example.quizapp.data.remote.IQuizApiClient;
 import com.example.quizapp.models.Questions;
 import com.example.quizapp.models.QuizResult;
-
 import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class QuizViewModel extends ViewModel {
 
@@ -63,7 +58,7 @@ public class QuizViewModel extends ViewModel {
                         mCategoryString = "Mixed";
                     }
                     if (difficulty != null) {
-                        mDifficultyString = mQuestions.get(0).getDifficulty().toString();
+                        mDifficultyString = mQuestions.get(0).getDifficulty();
                     } else {
                         mDifficultyString = "All";
                     }

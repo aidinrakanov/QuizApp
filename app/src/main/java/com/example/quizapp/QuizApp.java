@@ -41,8 +41,6 @@ public class QuizApp extends Application {
         historyStorage = repository;
 
         quizDatabase.quizDao();
-
-
     }
 
 }

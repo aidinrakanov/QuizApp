@@ -33,10 +33,6 @@ public class HistoryFragment extends Fragment implements HistoryAdapter.Listener
     private List<History> historyList = new ArrayList<>();
 
 
-    public static HistoryFragment newInstance() {
-        return new HistoryFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -74,11 +70,10 @@ public class HistoryFragment extends Fragment implements HistoryAdapter.Listener
         popupMenu.inflate(R.menu.menu_popup);
 
         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.popup_delete:
-                    mViewModel.deleteById.call();
-                    Toast.makeText(getContext(), "deleted" , Toast.LENGTH_SHORT).show();
-                    return true;
+            if (item.getItemId() == R.id.popup_delete) {
+                mViewModel.deleteById.call();
+                Toast.makeText(getContext(), "deleted", Toast.LENGTH_SHORT).show();
+                return true;
             }
             return false;
         });

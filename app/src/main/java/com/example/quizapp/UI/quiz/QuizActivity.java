@@ -1,37 +1,25 @@
 package com.example.quizapp.UI.quiz;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.quizapp.QuizApp;
 import com.example.quizapp.R;
 import com.example.quizapp.UI.result.ResultActivity;
-import com.example.quizapp.data.QuizRepository;
-import com.example.quizapp.data.remote.IQuizApiClient;
 import com.example.quizapp.models.Questions;
-import com.example.quizapp.models.QuizResponse;
-import com.example.quizapp.models.QuizResult;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +29,6 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
     public static final String EXTRA_CATEGORY = "category";
     public static final String EXTRA_DIFFICULTY = "difficulty";
     RecyclerView recyclerView;
-    private QuizRepository quizRepository = QuizApp.repository;
 
     String difficulty;
     int category;
@@ -73,12 +60,6 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
         viewModel.timeDown.observe(this, aLong -> tvTime.setText(aLong.toString()));
 
         skip.setOnClickListener(view -> viewModel.onSkipClick());
-//        viewModel.finishEvent.observe(this, new Observer<Void>() {
-//            @Override
-//            public void onChanged(Void aVoid) {
-//                finish();
-//            }
-//        });
     }
 
 
@@ -86,19 +67,15 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
     private void recyclerSets() {
         adapter = new QuizAdapter(list, this);
         recyclerView.setAdapter(adapter);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) {
+        RecyclerView.LayoutManager manager = new LinearLayoutManager
+                (this, LinearLayoutManager.HORIZONTAL, false) {
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         };
         recyclerView.setLayoutManager(manager);
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return false;
-            }
-        });
+        recyclerView.setOnTouchListener((view, motionEvent) -> true);
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
     }
@@ -114,12 +91,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
         lottie = findViewById(R.id.lottie_load);
         tvTime = findViewById(R.id.tv_time);
         finish_btn = findViewById(R.id.quiz_finish);
-        finish_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-            }
+        finish_btn.setOnClickListener(view -> {
         });
 
     }
