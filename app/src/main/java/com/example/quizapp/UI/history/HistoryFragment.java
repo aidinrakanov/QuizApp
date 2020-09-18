@@ -77,12 +77,11 @@ public class HistoryFragment extends Fragment implements HistoryAdapter.Listener
             switch (item.getItemId()) {
                 case R.id.popup_delete:
                     mViewModel.deleteById.call();
+                    Toast.makeText(getContext(), "deleted" , Toast.LENGTH_SHORT).show();
                     return true;
             }
             return false;
         });
-        popupMenu.setOnDismissListener(menu -> Toast.makeText(getContext(), "Deleted",
-                Toast.LENGTH_SHORT).show());
         popupMenu.show();
     }
 

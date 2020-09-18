@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:elevation="10dp"
-    app:cardBackgroundColor="#B2D8E5F3"
+    app:cardBackgroundColor="#D8E5F3"
     app:cardCornerRadius="16dp"
     app:cardElevation="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="170dp"
         android:padding="10dp">
 
         <TextView

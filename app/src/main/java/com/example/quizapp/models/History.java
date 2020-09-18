@@ -8,16 +8,16 @@ public class History {
     private String difficulty;
     private int amounts;
     private int correctAnswer;
-    private String createAt;
+    private Date createdAt;
 
     public History(int id, String category, String difficulty,
-                   int correctAnswer, int amounts, String createdAt) {
+                   int correctAnswer, int amounts, Date createdAt) {
         this.id = id;
         this.category = category;
         this.difficulty = difficulty;
         this.correctAnswer = correctAnswer;
         this.amounts = amounts;
-        this.createAt = createdAt;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -28,7 +28,6 @@ public class History {
         this.id = id;
     }
 
-    private Date createdAt;
 
     public String getCategory() {
         return category;

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quizapp.R;
 
@@ -41,11 +42,9 @@ public class SettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         clearhistory = view.findViewById(R.id.clear_history);
-        clearhistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mViewModel.clearAllHistory();
-            }
+        clearhistory.setOnClickListener(view1 -> {
+            mViewModel.clearAllHistory();
+            Toast.makeText(getContext(), "History has been deleted", Toast.LENGTH_SHORT).show();
         });
     }
 }

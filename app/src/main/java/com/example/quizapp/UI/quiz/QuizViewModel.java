@@ -14,6 +14,7 @@ import com.example.quizapp.models.Questions;
 import com.example.quizapp.models.QuizResult;
 
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -79,15 +80,12 @@ public class QuizViewModel extends ViewModel {
     }
 
     void finishQuiz() {
-        @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat("d.MMM.yyyy, HH:mm");
-        String date = df.format(Calendar.getInstance().getTime());
+        Date date = new Date();
+        DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(date);
         QuizResult result = new QuizResult(
-                id,
-                mCategoryString,
-                mDifficultyString,
-                getCorrectAnswersAmount(),
-                mQuestions,
-                date
+                id, mCategoryString,
+                mDifficultyString, getCorrectAnswersAmount(),
+                mQuestions, date
         );
         int resultId = QuizApp.historyStorage.saveQuizResult(result);
         finishEvent.call();

@@ -31,11 +31,11 @@ public class QuizResult {
     private List<Questions> questions;
 
     @TypeConverters({DateConverter.class})
-    private String createdAt;
+    private Date createdAt;
 
     public QuizResult(int id, String category,
                       String difficulty, int correctAnswerResult,
-                      List<Questions> questions, String createdAt) {
+                      List<Questions> questions, Date createdAt) {
         this.id = id;
         this.category = category;
         this.difficulty = difficulty;
@@ -85,11 +85,11 @@ public class QuizResult {
         this.questions = questions;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 }
