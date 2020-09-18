@@ -161,9 +161,9 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
                     category_text.setText("Any Category");
                 }
                 if (integer + 1 == list.size()) {
-                    skip.setVisibility(View.GONE);
-                    finish_btn.setVisibility(View.VISIBLE);
-                }
+                    skip.setText("Finish");                }
+            }else {
+                skip.setText("skip");
             }
         });
 

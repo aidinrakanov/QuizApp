@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class QuizViewModel extends ViewModel {
 
@@ -81,7 +82,7 @@ public class QuizViewModel extends ViewModel {
 
     void finishQuiz() {
         Date date = new Date();
-        DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(date);
+        DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(date);
         QuizResult result = new QuizResult(
                 id, mCategoryString,
                 mDifficultyString, getCorrectAnswersAmount(),
