@@ -145,46 +145,46 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.Questions_View
                 switch (questions.getSelectAnswerPosition()) {
                     case 0:
                         if (questions.getCorrectAnswers().equals(questions.getAnswers().get(0))) {
-                            first.setBackgroundResource(R.color.Green);
-                            b_true.setBackgroundResource(R.color.Green);
+                            first.setBackgroundResource(R.drawable.quiz_green);
+                            b_true.setBackgroundResource(R.drawable.quiz_green);
                             first.setTextColor(R.color.White);
                             b_true.setTextColor(R.color.White);
                         } else {
-                            first.setBackgroundResource(R.color.Red);
-                            b_true.setBackgroundResource(R.color.Red);
+                            first.setBackgroundResource(R.drawable.quiz_red);
+                            b_true.setBackgroundResource(R.drawable.quiz_red);
                             first.setTextColor(Color.WHITE);
                             b_true.setTextColor(Color.WHITE);
                         }
                         break;
                     case 1:
                         if (questions.getCorrectAnswers().equals(questions.getAnswers().get(1))) {
-                            second.setBackgroundResource(R.color.Green);
-                            b_false.setBackgroundResource(R.color.Green);
+                            second.setBackgroundResource(R.drawable.quiz_green);
+                            b_false.setBackgroundResource(R.drawable.quiz_green);
                             second.setTextColor(R.color.White);
                             b_false.setTextColor(R.color.White);
                         } else {
-                            second.setBackgroundResource(R.color.Red);
-                            b_false.setBackgroundResource(R.color.Red);
+                            second.setBackgroundResource(R.drawable.quiz_red);
+                            b_false.setBackgroundResource(R.drawable.quiz_red);
                             second.setTextColor(Color.WHITE);
                             b_false.setTextColor(Color.WHITE);
                         }
                         break;
                     case 2:
                         if (questions.getAnswers().get(2).equals(questions.getCorrectAnswers())) {
-                            third.setBackgroundResource(R.color.Green);
+                            third.setBackgroundResource(R.drawable.quiz_green);
                             third.setTextColor(R.color.White);
 
                         } else {
-                            third.setBackgroundResource(R.color.Red);
+                            third.setBackgroundResource(R.drawable.quiz_red);
                             third.setTextColor(Color.WHITE);
                         }
                         break;
                     case 3:
                         if (questions.getAnswers().get(3).equals(questions.getCorrectAnswers())) {
-                            fourth.setBackgroundResource(R.color.Green);
+                            fourth.setBackgroundResource(R.drawable.quiz_green);
                             fourth.setTextColor(R.color.White);
                         } else {
-                            fourth.setBackgroundResource(R.color.Red);
+                            fourth.setBackgroundResource(R.drawable.quiz_red);
                             fourth.setTextColor(Color.WHITE);
                         }
                         break;

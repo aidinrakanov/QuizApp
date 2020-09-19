@@ -3,6 +3,7 @@ package com.example.quizapp.UI.settings;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quizapp.QuizApp;
 import com.example.quizapp.R;
 
 public class SettingsFragment extends Fragment {
@@ -43,8 +45,16 @@ public class SettingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         clearhistory = view.findViewById(R.id.clear_history);
         clearhistory.setOnClickListener(view1 -> {
-            mViewModel.clearAllHistory();
-            Toast.makeText(getContext(), "History cleared", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
+            alertBuilder.setTitle("Внимание!!!");
+            alertBuilder.setMessage("Вы точно хотите очистить историю?");
+            alertBuilder.setPositiveButton("Да", (dialog, which) ->
+                    QuizApp.quizDatabase.quizDao().deleteAll());
+            alertBuilder.setNegativeButton("Нет", (dialog, which) -> dialog.cancel());
+            AlertDialog alertDialog = alertBuilder.create();
+            alertDialog.show();
+//
+
         });
     }
 }
