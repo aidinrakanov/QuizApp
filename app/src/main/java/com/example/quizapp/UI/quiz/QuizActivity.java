@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -118,6 +119,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
         }
     }
 
+
     @SuppressLint("SetTextI18n")
     private void getPosition() {
         viewModel.currentQuestionPosition.observe(this, integer -> {
@@ -125,7 +127,17 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.Liste
                 viewModel.startTimeDown();
                 viewModel.delayTime(recyclerView, integer);
                 quiz_amount.setText((integer + 1) + "/" + amountCount);
-                recyclerView.smoothScrollToPosition(integer);
+                new CountDownTimer(500, 500) {
+                    @Override
+                    public void onTick(long l) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        recyclerView.smoothScrollToPosition(integer);
+                    }
+                }.start();
                 progressBar.setProgress(integer + 1);
                 progressBar.setMax(amountCount);
                 category_text.setText(list.get(integer).getCategory());

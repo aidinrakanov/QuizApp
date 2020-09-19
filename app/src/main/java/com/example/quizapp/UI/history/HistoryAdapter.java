@@ -75,7 +75,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             history_category.setText(history.getCategory());
             history_correctAnswers.setText(history.getCorrectAnswer() + "/" + history.getAmounts());
             history_difficulty.setText(history.getDifficulty());
-            history_time.setText(String.valueOf(history.getCreatedAt()));
+            history_time.setText(history.getCreatedAt().toLocaleString());
         }
     }
 

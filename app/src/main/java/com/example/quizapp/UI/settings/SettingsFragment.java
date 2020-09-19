@@ -44,7 +44,7 @@ public class SettingsFragment extends Fragment {
         clearhistory = view.findViewById(R.id.clear_history);
         clearhistory.setOnClickListener(view1 -> {
             mViewModel.clearAllHistory();
-            Toast.makeText(getContext(), "History has been deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "History cleared", Toast.LENGTH_SHORT).show();
         });
     }
 }
